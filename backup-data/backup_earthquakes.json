@@ -1,0 +1,193 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "generated": 1615597410000,
+    "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson",
+    "title": "USGS All Earthquakes, Past Week (Backup Data)",
+    "status": 200,
+    "api": "1.10.3",
+    "count": 100
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 6.2,
+        "place": "15km W of San Francisco, CA",
+        "time": 1615590000000,
+        "updated": 1615597000000,
+        "tz": -480,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/sample1",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/sample1.geojson",
+        "felt": 1027,
+        "cdi": 5.3,
+        "mmi": 5.7,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 870,
+        "net": "us",
+        "code": "sample1",
+        "ids": ",us7000dflf,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 4.428,
+        "rms": 0.93,
+        "gap": 55,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 6.2 - 15km W of San Francisco, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.5, 37.7, 10]
+      },
+      "id": "us7000dflf"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.4,
+        "place": "25km SE of Los Angeles, CA",
+        "time": 1615580000000,
+        "updated": 1615587000000,
+        "tz": -480,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/sample2",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/sample2.geojson",
+        "felt": 854,
+        "cdi": 4.8,
+        "mmi": 5.2,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 750,
+        "net": "us",
+        "code": "sample2",
+        "ids": ",us7000dflg,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 3.728,
+        "rms": 0.85,
+        "gap": 65,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 5.4 - 25km SE of Los Angeles, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-118.1, 34.0, 15]
+      },
+      "id": "us7000dflg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 7.1,
+        "place": "85km E of Tokyo, Japan",
+        "time": 1615570000000,
+        "updated": 1615577000000,
+        "tz": 540,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/sample3",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/sample3.geojson",
+        "felt": 2854,
+        "cdi": 6.8,
+        "mmi": 7.2,
+        "alert": "yellow",
+        "status": "reviewed",
+        "tsunami": 1,
+        "sig": 950,
+        "net": "us",
+        "code": "sample3",
+        "ids": ",us7000dflh,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 5.128,
+        "rms": 1.05,
+        "gap": 45,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 7.1 - 85km E of Tokyo, Japan"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [140.5, 35.7, 45]
+      },
+      "id": "us7000dflh"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.7,
+        "place": "30km N of Seattle, WA",
+        "time": 1615560000000,
+        "updated": 1615567000000,
+        "tz": -480,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/sample4",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/sample4.geojson",
+        "felt": 587,
+        "cdi": 4.1,
+        "mmi": 4.5,
+        "alert": "green",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 650,
+        "net": "us",
+        "code": "sample4",
+        "ids": ",us7000dfli,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 2.928,
+        "rms": 0.78,
+        "gap": 75,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 4.7 - 30km N of Seattle, WA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.3, 47.8, 8]
+      },
+      "id": "us7000dfli"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 6.8,
+        "place": "75km S of Mexico City, Mexico",
+        "time": 1615550000000,
+        "updated": 1615557000000,
+        "tz": -360,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/sample5",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/sample5.geojson",
+        "felt": 1987,
+        "cdi": 5.7,
+        "mmi": 6.1,
+        "alert": "yellow",
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 890,
+        "net": "us",
+        "code": "sample5",
+        "ids": ",us7000dflj,",
+        "sources": ",us,",
+        "types": ",dyfi,origin,phase-data,shakemap,",
+        "nst": null,
+        "dmin": 4.828,
+        "rms": 0.98,
+        "gap": 50,
+        "magType": "mww",
+        "type": "earthquake",
+        "title": "M 6.8 - 75km S of Mexico City, Mexico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-99.1, 18.7, 25]
+      },
+      "id": "us7000dflj"
+    }
+  ]
+}
