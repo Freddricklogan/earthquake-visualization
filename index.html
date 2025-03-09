@@ -8,9 +8,6 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
     
@@ -20,48 +17,6 @@
 <body>
     <!-- Map container -->
     <div id="map"></div>
-    
-    <!-- Additional information modal -->
-    <div class="modal" id="info-modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>About This Visualization</h2>
-            <p>This advanced earthquake visualization displays worldwide seismic activity from the USGS Earthquake Hazards Program.</p>
-            
-            <h3>Features</h3>
-            <ul>
-                <li>Real-time earthquake data for the past 7 days</li>
-                <li>Multiple map views including street, satellite, topographic, and dark mode</li>
-                <li>Tectonic plate boundaries</li>
-                <li>Magnitude and depth filtering</li>
-                <li>Time-based animation</li>
-                <li>Earthquake heatmap visualization</li>
-                <li>Detailed statistics and information</li>
-            </ul>
-            
-            <h3>How to Use</h3>
-            <ul>
-                <li>Use the layer control (top right) to switch between different map views and data layers</li>
-                <li>Apply magnitude and depth filters with the control panel (top left)</li>
-                <li>Use the time slider (bottom left) to see earthquakes as they occurred through time</li>
-                <li>Click on any earthquake for detailed information</li>
-            </ul>
-            
-            <h3>Data Sources</h3>
-            <p>All earthquake data comes from the <a href="https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php" target="_blank">USGS Earthquake Hazards Program</a>.</p>
-            <p>Tectonic plate boundaries from <a href="https://github.com/fraxen/tectonicplates" target="_blank">fraxen/tectonicplates</a>.</p>
-            
-            <div class="about-author">
-                <p>Created by Fredrick Logan</p>
-                <p><a href="https://github.com/freddricklogan" target="_blank">GitHub Profile</a></p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Info button -->
-    <button id="info-button" title="About this visualization">
-        <i class="fas fa-info-circle"></i>
-    </button>
     
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -74,28 +29,5 @@
     
     <!-- Custom JS -->
     <script src="logic.js"></script>
-    
-    <script>
-        // Modal functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('info-modal');
-            const infoButton = document.getElementById('info-button');
-            const closeButton = document.querySelector('.close-button');
-            
-            infoButton.addEventListener('click', function() {
-                modal.style.display = 'block';
-            });
-            
-            closeButton.addEventListener('click', function() {
-                modal.style.display = 'none';
-            });
-            
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 </html>

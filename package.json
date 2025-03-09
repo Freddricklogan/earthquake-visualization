@@ -1,0 +1,10 @@
+{
+  "name": "earthquake-visualization",
+  "version": "1.0.0",
+  "description": "Advanced visualization of earthquake data from USGS with multiple visualization layers",
+  "homepage": "https://freddricklogan.github.io/earthquake-visualization",
+  "scripts": {
+    "predeploy": "echo 'Ready to deploy'",
+    "deploy": "echo 'This is a static site - no build needed'"
+  }
+}
