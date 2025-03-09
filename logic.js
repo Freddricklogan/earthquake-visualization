@@ -53,11 +53,15 @@ L.control.layers(baseMaps, overlayMaps, {
 L.control.scale().addTo(map);
 
 // Show loading indicator
-function showLoading(show) {
+function showLoading(show, message = "Loading earthquake data...") {
   if (show) {
+    // Remove any existing loader first
+    const existingLoader = document.getElementById('loader');
+    if (existingLoader) existingLoader.remove();
+    
     const loader = document.createElement('div');
     loader.id = 'loader';
-    loader.innerHTML = '<div class="spinner"></div><p>Loading earthquake data...</p>';
+    loader.innerHTML = `<div class="spinner"></div><p>${message}</p>`;
     document.body.appendChild(loader);
   } else {
     const loader = document.getElementById('loader');
@@ -65,35 +69,97 @@ function showLoading(show) {
   }
 }
 
+// Show error message
+function showError(message) {
+  const errorDiv = document.createElement('div');
+  errorDiv.id = 'error-message';
+  errorDiv.innerHTML = `
+    <div class="error-content">
+      <h3>Data Loading Error</h3>
+      <p>${message}</p>
+      <button id="retry-button">Retry</button>
+      <button id="use-backup-button">Use Backup Data</button>
+    </div>
+  `;
+  document.body.appendChild(errorDiv);
+  
+  // Add event listeners to buttons
+  document.getElementById('retry-button').addEventListener('click', function() {
+    document.getElementById('error-message').remove();
+    loadData();
+  });
+  
+  document.getElementById('use-backup-button').addEventListener('click', function() {
+    document.getElementById('error-message').remove();
+    loadBackupData();
+  });
+}
+
 // Begin data loading
 showLoading(true);
 
-// Get earthquake data
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson")
-  .then(function(data) {
-    // Process earthquake data
-    processEarthquakes(data);
-    
-    // Then load tectonic plate data
-    return d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json");
-  })
-  .then(function(plateData) {
-    // Process the tectonic plate data
+// Load data function to handle the main data loading
+function loadData() {
+  showLoading(true);
+  
+  // Get earthquake data
+  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson")
+    .then(function(data) {
+      // Process earthquake data
+      processEarthquakes(data);
+      
+      // Store the earthquake data for potential heatmap use
+      window.earthquakeData = data;
+      
+      // Then load tectonic plate data
+      return d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json");
+    })
+    .then(function(plateData) {
+      // Process the tectonic plate data
+      processTectonicPlates(plateData);
+      
+      // Create heatmap from earthquake data
+      createHeatmap(window.earthquakeData);
+      
+      // Hide loading indicator
+      showLoading(false);
+    })
+    .catch(function(error) {
+      console.error("Error loading data:", error);
+      showLoading(false);
+      showError("Failed to load earthquake data from USGS. Please try again or use backup data.");
+    });
+}
+
+// Load backup data function
+function loadBackupData() {
+  showLoading(true, "Loading backup earthquake data...");
+  
+  // Use fetch instead of d3.json for better control
+  Promise.all([
+    fetch('https://raw.githubusercontent.com/freddricklogan/earthquake-visualization/backup-data/backup_earthquakes.json')
+      .then(response => response.json()),
+    fetch('https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json')
+      .then(response => response.json())
+  ])
+  .then(([earthquakeData, plateData]) => {
+    // Process the data
+    processEarthquakes(earthquakeData);
     processTectonicPlates(plateData);
-    
-    // Create heatmap from earthquake data
-    createHeatmap(data);
-    
-    // Hide loading indicator
+    createHeatmap(earthquakeData);
     showLoading(false);
   })
-  .catch(function(error) {
-    console.error("Error loading data:", error);
-    alert("Failed to load earthquake data. Please try again later.");
+  .catch(error => {
+    console.error("Error loading backup data:", error);
     showLoading(false);
+    alert("Unable to load backup data. Please check your internet connection and try again.");
   });
+}
 
 function processEarthquakes(data) {
+  // Clear any existing layers
+  earthquakes.clearLayers();
+  
   // Define marker size function
   function markerSize(magnitude) {
     return magnitude * 4;
@@ -157,6 +223,9 @@ function processEarthquakes(data) {
 }
 
 function processTectonicPlates(plateData) {
+  // Clear any existing layers
+  tectonicPlates.clearLayers();
+  
   // Create GeoJSON layer for tectonic plates with visible styling
   L.geoJson(plateData, {
     style: {
@@ -171,6 +240,9 @@ function processTectonicPlates(plateData) {
 }
 
 function createHeatmap(data) {
+  // Clear any existing layers
+  heatmapLayer.clearLayers();
+  
   // Extract coordinates and magnitude for heatmap
   let heatArray = [];
   
@@ -196,3 +268,6 @@ function createHeatmap(data) {
   // Add heatmap layer to the map
   heatmapLayer.addTo(map);
 }
+
+// Start loading the data
+loadData();
