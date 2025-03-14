@@ -22,7 +22,7 @@ An interactive web application that visualizes real-time earthquake data from ar
 
 ## Technologies Used
 
-- **Leaflet.js**: Interactive mapping library
+- **Leaflet.js**: Interactive mapping libraries
 - **D3.js**: Data handling and manipulation
 - **Leaflet.heat**: Heat map visualization plugin
 - **USGS API**: Earthquake data source
