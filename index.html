@@ -3,31 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Earthquake Visualization</title>
-    
-    <!-- Leaflet CSS -->
+    <title>Global Earthquake Visualization — Live Seismic Map</title>
+    <meta name="description" content="An interactive map of global earthquake activity from live USGS data — magnitude, depth, and location visualized with Leaflet and D3, including a heatmap layer.">
+    <meta name="author" content="Freddrick Logan">
+    <meta name="theme-color" content="#0a1730">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Global Earthquake Visualization — Live Seismic Map">
+    <meta property="og:description" content="Interactive map of global earthquake data (magnitude, depth, location) built with Leaflet and D3.">
+    <meta property="og:url" content="https://freddricklogan.github.io/earthquake-visualization/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1730'/%3E%3Cpath d='M4 17h5l2-6 3 11 3-14 3 12 2-3h5' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Map container -->
+    <header class="topbar">
+        <div class="topbar__brand">
+            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#122a4f"/><path d="M4 17h5l2-6 3 11 3-14 3 12 2-3h5" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="topbar__title">
+                <strong>Global Earthquake Visualization</strong>
+                <span>Live seismic activity &middot; USGS data</span>
+            </div>
+        </div>
+        <div class="topbar__tags">
+            <span class="pill">Leaflet</span><span class="pill">D3.js</span><span class="pill">Heatmap</span>
+        </div>
+    </header>
+
     <div id="map"></div>
-    
-    <!-- Leaflet JS -->
+
+    <footer class="mapcredit">
+        Built by <a href="https://github.com/Freddricklogan">Freddrick Logan</a> &middot;
+        <a href="https://github.com/Freddricklogan/earthquake-visualization">Source</a> &middot;
+        <a href="https://www.linkedin.com/in/freddricklogan/">LinkedIn</a>
+    </footer>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Leaflet heatmap plugin -->
     <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
-    
-    <!-- D3.js for data handling -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    
-    <!-- Custom JS -->
     <script src="logic.js"></script>
 </body>
 </html>
