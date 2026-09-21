@@ -1,0 +1,35 @@
+/* Demo-specific styles. Shell tokens come from exec-shell.css. */
+.eq-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 980px) { .eq-layout { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; min-width: 0; }
+.panel h2 { margin: 0 0 10px; font-size: .78rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.stack { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: .78rem; color: var(--muted); }
+.field input[type=number], .field select { background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 8px; font: inherit; font-size: .88rem; }
+.field input[type=range] { width: 100%; accent-color: var(--accent); }
+.check { display: flex; align-items: center; gap: 8px; font-size: .86rem; }
+.btn { padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--panel-2); color: var(--text); font: inherit; font-size: .84rem; font-weight: 600; cursor: pointer; }
+.btn--small { padding: 4px 8px; font-size: .76rem; }
+#map { height: 560px; border-radius: var(--radius); border: 1px solid var(--border); background: #0b1220; }
+@media (max-width: 640px) { #map { height: 420px; } }
+.status { font-size: .8rem; color: var(--muted); margin: 10px 0 0; }
+.legend { background: rgba(17,26,46,.92); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: .74rem; line-height: 1.5; }
+.legend h4 { margin: 0 0 4px; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.legend__swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: middle; border: 1px solid rgba(0,0,0,.4); }
+.cluster { background: rgba(88,166,255,.85); color: #06101f; border: 2px solid #e6edf3; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: .78rem; box-shadow: 0 0 0 4px rgba(88,166,255,.25); }
+.cluster span { display: block; }
+.leaflet-container { font-family: var(--shell-font); }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+.leaflet-popup-content p { margin: 4px 0; color: var(--muted); font-size: .82rem; }
+.leaflet-popup-content a { color: var(--accent); }
+.leaflet-control-layers, .leaflet-bar a { background: var(--panel); color: var(--text); border-color: var(--border); }
+.leaflet-control-attribution { background: rgba(17,26,46,.85); color: var(--muted); font-size: .68rem; }
+.leaflet-control-attribution a { color: var(--accent); }
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .82rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; white-space: nowrap; }
+th { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.bins { list-style: none; margin: 0; padding: 0; font-size: .82rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; }
+.method { font-size: .8rem; color: var(--muted); margin: 8px 0 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }

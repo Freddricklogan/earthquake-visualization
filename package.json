@@ -1,10 +1,22 @@
 {
   "name": "earthquake-visualization",
   "version": "1.0.0",
-  "description": "Advanced visualization of earthquake data from USGS with multiple visualization layers",
-  "homepage": "https://freddricklogan.github.io/earthquake-visualization",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
   "scripts": {
-    "predeploy": "echo 'Ready to deploy'",
-    "deploy": "echo 'This is a static site - no build needed'"
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "validate": "html-validate index.html",
+    "serve": "npx serve ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^16.0.0",
+    "html-validate": "^9.0.0",
+    "vitest": "^3.0.0"
   }
 }

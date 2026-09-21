@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Earthquake Visualization — Live Seismic Map</title>
-    <meta name="description" content="An interactive map of global earthquake activity from live USGS data — magnitude, depth, and location visualized with Leaflet and D3, including a heatmap layer.">
-    <meta name="author" content="Freddrick Logan">
-    <meta name="theme-color" content="#0a1730">
-    <meta property="og:type" content="website">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1730'/%3E%3Cpath d='M4 17h5l2-6 3 11 3-14 3 12 2-3h5' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap">
-    <link rel="stylesheet" href="style.css">
-<link rel="canonical" href="https://freddricklogan.github.io/earthquake-visualization/">
-<meta name="robots" content="index, follow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://cdn.jsdelivr.net https://*.tile.openstreetmap.org https://*.tile.opentopomap.org https://server.arcgisonline.com; connect-src 'self' https://earthquake.usgs.gov; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Global Earthquake Visualization — live USGS map</title>
+<meta name="description" content="Interactive map of the past week's earthquakes from the live USGS GeoJSON feed: depth-coloured markers, grid clustering, heat layer, tectonic plate boundaries, filters and an accessible table of the strongest events. By Freddrick Logan.">
 <meta name="author" content="Freddrick Logan">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Freddrick Logan">
-<meta property="og:title" content="Global Earthquake Visualization — Live Seismic Map">
-<meta property="og:description" content="An interactive map of global earthquake activity from live USGS data — magnitude, depth, and location visualized with Leaflet and D3, including a heatmap layer.">
-<meta property="og:url" content="https://freddricklogan.github.io/earthquake-visualization/">
-<meta property="og:image" content="https://images.unsplash.com/photo-1617396900799-f4ec2b43c7ae?auto=format&fit=crop&w=1200&h=630&q=80">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Global Earthquake Visualization — Live Seismic Map">
-<meta name="twitter:description" content="An interactive map of global earthquake activity from live USGS data — magnitude, depth, and location visualized with Leaflet and D3, including a heatmap layer.">
-<meta name="twitter:image" content="https://images.unsplash.com/photo-1617396900799-f4ec2b43c7ae?auto=format&fit=crop&w=1200&h=630&q=80">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Global Earthquake Visualization \u2014 Live Seismic Map","description":"An interactive map of global earthquake activity from live USGS data \u2014 magnitude, depth, and location visualized with Leaflet and D3, including a heatmap layer.","url":"https://freddricklogan.github.io/earthquake-visualization/","image":"https://images.unsplash.com/photo-1617396900799-f4ec2b43c7ae?auto=format&fit=crop&w=1200&h=630&q=80","applicationCategory":"WebApplication","operatingSystem":"Any (Web)","author":{"@type":"Person","name":"Freddrick Logan","url":"https://fredlogan.phd"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="canonical" href="https://freddricklogan.github.io/earthquake-visualization/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b1220'/%3E%3Cpath d='M4 17h5l2-6 3 11 3-14 3 12 2-3h5' fill='none' stroke='%2358a6ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<link rel="stylesheet" href="src/exec-shell.css">
+<link rel="stylesheet" href="src/app.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js" integrity="sha384-mFKkGiGvT5vo1fEyGCD3hshDdKmW3wzXW/x+fWriYJArD0R3gawT6lMvLboM22c0" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar__brand">
-            <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#122a4f"/><path d="M4 17h5l2-6 3 11 3-14 3 12 2-3h5" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <div class="topbar__title">
-                <strong>Global Earthquake Visualization</strong>
-                <span>Live seismic activity &middot; USGS data</span>
-            </div>
+<main id="demo-root" class="exec-main">
+  <div class="eq-layout">
+    <aside class="stack">
+      <section class="panel" id="filters" aria-labelledby="h-filters">
+        <h2 id="h-filters">Filters</h2>
+        <div class="stack">
+          <div class="field"><label for="min-mag">Minimum magnitude</label><input id="min-mag" type="range" min="0" max="7" step="0.1" value="0" aria-describedby="min-mag-out"><output id="min-mag-out" for="min-mag">0.0</output></div>
+          <div class="field"><label for="window">Time window</label><select id="window"><option value="1">Past hour</option><option value="24">Past day</option><option value="168" selected>Past 7 days</option></select></div>
+          <div class="field"><label for="max-depth">Maximum depth (km, blank = any)</label><input id="max-depth" type="number" min="0" step="10" placeholder="any"></div>
         </div>
-        <div class="topbar__tags">
-            <span class="pill">Leaflet</span><span class="pill">D3.js</span><span class="pill">Heatmap</span>
+      </section>
+      <section class="panel" id="layers" aria-labelledby="h-layers">
+        <h2 id="h-layers">Layers</h2>
+        <div class="stack">
+          <div class="check"><input type="checkbox" id="heat"><label for="heat">Heat layer (weighted by magnitude)</label></div>
+          <div class="check"><input type="checkbox" id="plates"><label for="plates">Tectonic plate boundaries (Bird 2003)</label></div>
+          <button type="button" class="btn" id="refresh">Refresh from USGS</button>
         </div>
-    </header>
-
-    <div id="map"></div>
-
-    <footer class="mapcredit">
-        Built by <a href="https://github.com/Freddricklogan">Freddrick Logan</a> &middot;
-        <a href="https://github.com/Freddricklogan/earthquake-visualization">Source</a> &middot;
-        <a href="https://www.linkedin.com/in/freddricklogan/">LinkedIn</a>
-    </footer>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="logic.js"></script>
+        <p class="method">The live feed is fetched in a Web Worker and cached in this browser for 15 minutes. If USGS is unreachable, a committed snapshot of the M2.5+ week feed is used and the status line says so.</p>
+      </section>
+      <section class="panel" aria-labelledby="h-bins">
+        <h2 id="h-bins">Shown events by depth</h2>
+        <ul class="bins" id="depth-bins"></ul>
+        <p class="method" id="mag-bins"></p>
+      </section>
+    </aside>
+    <div class="stack">
+      <section id="map-section" aria-labelledby="h-map"><h2 id="h-map" class="sr-only">Map of recent earthquakes; the table below lists the strongest events for keyboard users</h2><div id="map"></div></section>
+      <p class="status" id="status" aria-live="polite">Loading the USGS feed…</p>
+      <section class="panel" id="top-table" aria-labelledby="h-top">
+        <h2 id="h-top">Strongest events shown</h2>
+        <div class="table-wrapper"><table><thead><tr><th scope="col">Magnitude</th><th scope="col">Place</th><th scope="col">Depth</th><th scope="col">Time</th><th scope="col">Map</th></tr></thead><tbody id="top-tbody"></tbody></table></div>
+      </section>
+    </div>
+  </div>
+</main>
+<script type="module" src="src/main.js"></script>
 </body>
 </html>
