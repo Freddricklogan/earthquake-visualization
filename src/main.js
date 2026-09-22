@@ -152,6 +152,7 @@ async function boot() {
   render();
 
   shell = mountExecShell({
+  theme: 'signal',
     title: 'Global Earthquake Visualization',
     tagline: 'Live USGS feed for the past seven days, fetched in a Web Worker and cached for fifteen minutes; grid clustering, depth-coloured markers, a heat layer, plate boundaries, and a keyboard-reachable table of the strongest events. A dated snapshot is the fallback.',
     repo: 'https://github.com/Freddricklogan/earthquake-visualization',
