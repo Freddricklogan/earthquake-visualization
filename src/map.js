@@ -1,3 +1,4 @@
+import { tokens } from './exec-shell.js';
 /** Leaflet wiring. Everything here touches the DOM or Leaflet; nothing computes. */
 import { clusterEvents, shouldCluster } from './cluster.js';
 import { mag, utc } from './format.js';
@@ -82,7 +83,7 @@ export function createMap(L, container) {
     }
   }
   function addEvent(e) {
-    L.circleMarker([e.lat, e.lon], { radius: magnitudeRadius(e.mag, map.getZoom()), fillColor: depthColour(e.depth), color: '#0b1220', weight: 1, opacity: 1, fillOpacity: 0.85 })
+    L.circleMarker([e.lat, e.lon], { radius: magnitudeRadius(e.mag, map.getZoom()), fillColor: depthColour(e.depth), color: tokens().bg, weight: 1, opacity: 1, fillOpacity: 0.85 })
       .bindPopup(popupHtml(e))
       .addTo(quakes);
   }
