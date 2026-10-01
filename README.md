@@ -34,7 +34,7 @@ reachable without the map. Strict CSP, pinned libraries with SRI, no
 | Readable at every zoom | Grid clustering below zoom 7 with count bubbles; marker radius scales with zoom |
 | Reachable without a pointer | Strongest-events table with Show buttons; keyboard-focusable clusters; labelled filters; `aria-live` status |
 | Basemaps that render | Esri Dark Gray default (no key), OpenStreetMap, OpenTopoMap, Esri imagery; CSP `img-src` lists exactly these hosts |
-| Tested where it can be | 12 tests over parsing, filters, summaries, clustering and formatting, including the committed USGS snapshot |
+| Tested where it can be | 20 tests over parsing, filters, summaries, clustering and formatting, including the committed USGS snapshot |
 
 ## 2. Demonstrated Competencies & Technical Skills
 
